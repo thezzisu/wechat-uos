@@ -1,0 +1,9 @@
+{
+  "name": "wechat-uos",
+  "packageManager": "yarn@3.5.0",
+  "dependencies": {
+    "electron": "19",
+    "zx": "^7.2.1"
+  },
+  "license": "MIT"
+}
