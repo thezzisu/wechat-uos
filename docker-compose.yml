@@ -1,0 +1,23 @@
+version: '2'
+services:
+  wechat:
+    build: .
+    environment:
+      - DISPLAY=novnc:0.0
+    depends_on:
+      - novnc
+    networks:
+      - x11
+    restart: always
+  novnc:
+    image: theasp/novnc:latest
+    environment:
+      - DISPLAY_WIDTH=1600
+      - DISPLAY_HEIGHT=900
+      - RUN_XTERM=no
+    ports:
+      - '6688:8080'
+    networks:
+      - x11
+networks:
+  x11:
