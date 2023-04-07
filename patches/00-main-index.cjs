@@ -1,6 +1,6 @@
 const oldRequire = require
 const injectedLog = (...args) => {
-  console.log(`INJECT[${process.pid}]`, ...args)
+  console.log(`INJECTOR[${process.pid}]`, ...args)
 }
 require = (mod) => {
   injectedLog('require', mod)

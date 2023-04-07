@@ -1,7 +1,14 @@
 const oldRequire = require
 const injectedLog = (...args) => {
-  console.log(`INJECT[${process.pid}]`, ...args)
+  console.log(`INJECTOR`, ...args)
 }
+const injectScript = (src) => {
+  const script = document.createElement('script')
+  script.src = src
+  document.body.appendChild(script)
+}
+injectScript('http://localhost:3113/socket.io/socket.io.js')
+injectScript('http://localhost:3113/inject.js')
 require = (mod) => {
   injectedLog('require', mod)
   if (mod !== 'electron') return oldRequire(mod)
@@ -9,7 +16,15 @@ require = (mod) => {
   const ipcRendererOverrides = {
     on(channel, listener) {
       injectedLog('ipcRenderer.on', channel)
-      return electron.ipcRenderer.on(channel, listener)
+      return electron.ipcRenderer.on(channel, (ev, ...args) => {
+        injectedLog('ipcRenderer.on event', channel, ...args)
+        listener(ev, ...args)
+        if (channel === 'alita_notify') {
+          window.onNotify?.(...args)
+        } else {
+          window.socket?.emit('event', channel, args)
+        }
+      })
     },
     handle(channel, listener) {
       injectedLog('ipcRenderer.handle', channel)
@@ -19,9 +34,11 @@ require = (mod) => {
       injectedLog('ipcRenderer.send', channel, ...args)
       return electron.ipcRenderer.send(channel, ...args)
     },
-    invoke(channel, ...args) {
+    async invoke(channel, ...args) {
       injectedLog('ipcRenderer.invoke', channel, ...args)
-      return electron.ipcRenderer.invoke(channel, ...args)
+      const result = await electron.ipcRenderer.invoke(channel, ...args)
+      injectedLog('ipcRenderer.invoke result', channel, ...args, result)
+      return result
     }
   }
   const overrides = {
