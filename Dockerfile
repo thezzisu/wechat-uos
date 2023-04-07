@@ -16,6 +16,8 @@ COPY ./dist/usr/lib/license /usr/lib/license
 COPY ./scripts /opt/wechat/scripts
 COPY ./dist /opt/wechat/dist
 COPY ./static /opt/wechat/static
+COPY ./lib /opt/wechat/lib
+COPY ./examples /opt/wechat/examples
 RUN chown root /opt/wechat/node_modules/electron/dist/chrome-sandbox &&\
     chmod 4755 /opt/wechat/node_modules/electron/dist/chrome-sandbox
 USER node
