@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  app:
+    image: ghcr.io/thezzisu/wechat-uos-app
+    environment:
+      - DISPLAY=novnc:0.0
+      - WECHAT_SERVER_URL=http://server:3113
+    depends_on:
+      - server
+      - novnc
+    networks:
+      - wechat
+    restart: always
+  server:
+    image: ghcr.io/thezzisu/wechat-uos-server
+    ports:
+      - '3113:3113'
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3113/health']
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - wechat
+    restart: always
+  novnc:
+    image: theasp/novnc:latest
+    environment:
+      - DISPLAY_WIDTH=1600
+      - DISPLAY_HEIGHT=900
+      - RUN_XTERM=no
+    ports:
+      - '6688:8080'
+    networks:
+      - wechat
+networks:
+  wechat:

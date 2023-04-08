@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    image: ghcr.io/thezzisu/wechat-uos-app
+    environment:
+      - DISPLAY=:0
+      - WECHAT_SERVER_URL=http://localhost:3113
+    depends_on:
+      - server
+    network_mode: host
+    restart: always
+    hostname: localhost.localdomain
+  server:
+    image: ghcr.io/thezzisu/wechat-uos-server
+    ports:
+      - '3113:3113'
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3113/health']
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
