@@ -3,7 +3,6 @@ FROM node:18 as builder
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
-COPY .yarn .yarn
 COPY packages/wechat-app packages/wechat-app
 RUN corepack yarn
 RUN corepack yarn workspace wechat-app zx scripts/prepare.mjs

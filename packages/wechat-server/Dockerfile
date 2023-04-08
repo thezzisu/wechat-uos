@@ -3,7 +3,6 @@ FROM node:18 as builder
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
-COPY .yarn .yarn
 COPY packages/wechat-server packages/wechat-server
 RUN corepack yarn
 RUN corepack yarn workspace wechat-server tsc
