@@ -11,5 +11,5 @@ if (!fs.existsSync(path.join(wd, 'wechat.deb'))) {
 }
 await $`ar -x wechat.deb`
 await $`tar -xf data.tar.xz`
-await $`cp -r ../assets/license license`
+await $`tar -xf ../assets/license.tar.gz -C .`
 await $`cp -r opt/apps/com.tencent.weixin/files/weixin/resources/app app`
