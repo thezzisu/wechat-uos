@@ -1,0 +1,9 @@
+{
+  "name": "advancedbot",
+  "packageManager": "yarn@3.5.0",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "socket.io-client": "^4.6.1"
+  }
+}
