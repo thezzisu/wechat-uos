@@ -28,6 +28,15 @@ services:
     networks:
       - wechat
     restart: always
+  bot:
+    build: examples/easybot
+    environment:
+      - WECHAT_SERVER_URL=http://server:3113
+    depends_on:
+      - server
+    networks:
+      - wechat
+    restart: always
   novnc:
     image: theasp/novnc:latest
     environment:

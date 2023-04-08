@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-const socket = io('http://localhost:3113/')
+const socket = io(`${process.env.WECHAT_SERVER_URL ?? 'http://localhost:3113'}/`)
 
 function getReply() {
   const replies = ['典', '急', '麻', '乐', '孝', '啊对对对']

@@ -1,4 +1,4 @@
-name: Build nuxt server
+name: Build Images
 
 on:
   push:
