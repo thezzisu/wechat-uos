@@ -29,11 +29,11 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/wechat-uos-app:latest
+          tags: ${{ env.REGISTRY }}/thezzisu/wechat-uos-app:latest
           file: packages/wechat-app/Dockerfile
       - name: Build wechat-uos-server
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/wechat-uos-server:latest
+          tags: ${{ env.REGISTRY }}/thezzisu/wechat-uos-server:latest
           file: packages/wechat-server/Dockerfile
