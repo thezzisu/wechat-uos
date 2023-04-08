@@ -7,4 +7,5 @@
 .pnp.*
 node_modules
 dist
-/lib
+lib
+.tsbuildinfo

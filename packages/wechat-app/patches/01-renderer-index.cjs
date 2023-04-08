@@ -7,8 +7,9 @@ const injectScript = (src) => {
   script.src = src
   document.body.appendChild(script)
 }
-injectScript('http://localhost:3113/socket.io/socket.io.js')
-injectScript('http://localhost:3113/inject.js')
+const wechatServerBase = process.env.WECHAT_SERVER_URL ?? 'http://localhost:3113'
+injectScript(`${wechatServerBase}/socket.io/socket.io.js`)
+injectScript(`${wechatServerBase}/inject.js`)
 require = (mod) => {
   injectedLog('require', mod)
   if (mod !== 'electron') return oldRequire(mod)

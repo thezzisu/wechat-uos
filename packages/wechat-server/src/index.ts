@@ -41,6 +41,11 @@ await server.register(fastifyStatic, {
   root: path.join(__dirname, '..', 'static')
 })
 
+server.get('/health', async () => {
+  return 'ok'
+})
+
 await server.listen({
-  port: 3113
+  port: 3113,
+  host: '0.0.0.0'
 })

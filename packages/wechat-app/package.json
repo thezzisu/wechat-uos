@@ -1,0 +1,10 @@
+{
+  "name": "wechat-app",
+  "packageManager": "yarn@3.5.0",
+  "dependencies": {
+    "electron": "19"
+  },
+  "devDependencies": {
+    "zx": "^7.2.1"
+  }
+}

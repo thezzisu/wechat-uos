@@ -2,9 +2,6 @@
   "compilerOptions": {
     "incremental": true,
     "target": "ESNext",
-    // "lib": [],
-    // "experimentalDecorators": true,
-    // "emitDecoratorMetadata": true,
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "types": [],
@@ -15,7 +12,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": [
     "src/**/*.ts"
