@@ -12,8 +12,8 @@ const io = new Server(server.server, {})
 io.on('connection', (socket) => {
   const type = socket.handshake.query.type ?? 'client'
   console.log(`Socket ${socket.id} (${type}) connected`)
-  if (type === 'agent') {
-    socket.join('agent')
+  if (type === 'agent_home') {
+    socket.join('agent_home')
     socket.on('event', (channel, args) => {
       io.to('client').emit('event', channel, args)
     })
@@ -24,7 +24,10 @@ io.on('connection', (socket) => {
     socket.join('client')
     socket.on('invoke', async (channel, args, cb) => {
       try {
-        const results = await io.to('agent').timeout(10000).emitWithAck('invoke', channel, args)
+        const results = await io
+          .to('agent_home')
+          .timeout(10000)
+          .emitWithAck('invoke', channel, args)
         cb(results[0])
       } catch (err) {
         console.log(err)

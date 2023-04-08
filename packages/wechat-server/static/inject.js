@@ -1,5 +1,6 @@
-const url = Document.currentScript.src.replace('inject.js', '')
-const socket = io(`${url}?type=agent`)
+const url = document.currentScript.src.replace('inject.js', '')
+const type = location.hash.split('/')[1] ?? 'unknown'
+const socket = io(`${url}?type=agent_${type}`)
 const { ipcRenderer } = require('electron')
 
 function getEventType(t) {
