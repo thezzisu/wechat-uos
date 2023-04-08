@@ -30,12 +30,10 @@ jobs:
         with:
           push: true
           tags: ${{ env.REGISTRY }}/wechat-uos-app:latest
-          context: '.'
           file: packages/wechat-app/Dockerfile
       - name: Build wechat-uos-server
         uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ env.REGISTRY }}/wechat-uos-server:latest
-          context: '.'
           file: packages/wechat-server/Dockerfile
