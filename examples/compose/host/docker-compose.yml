@@ -2,6 +2,7 @@ version: '3.8'
 services:
   app:
     image: ghcr.io/thezzisu/wechat-uos-app
+    command: bash -c "npm exec electron -- --no-sandbox /app/dist/app >/dev/null 2>&1"
     environment:
       - DISPLAY=:0
       - WECHAT_SERVER_URL=http://localhost:3113
